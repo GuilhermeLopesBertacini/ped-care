@@ -5,4 +5,6 @@ Projeto de auxilio ao cliente voltado para a área de saude de facil configuraç
 Integrado ao google agenda
 
 bibliotecas:
-pip install --upgrade google-api-python-client
+```bash
+py -m pip install --upgrade google-api-python-client
+```
