@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 import google.generativeai as genai
@@ -11,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 security = HTTPBearer()
 
+
+genai.configure("your_api_key")
 app = FastAPI()
 
 @app.get("/")
