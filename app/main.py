@@ -7,6 +7,8 @@ from infrastructure.calendar import calendar_manager, get_current_user
 from typing import List
 from utils.logger_class import LoggerClass
 
+
+genai.configure(api_key="your_api_key")
 app = FastAPI()
 LoggerClass.configure("ped-care", debug=True)
 
@@ -18,7 +20,8 @@ async def root():
 async def generate_text(req: PromptRequest):
     try:
         model = genai.GenerativeModel("gemini-2.5-flash")  # or gemini-1.5-pro
-        response = model.generate_content(req.prompt)
+        prompt = "Agora você é uma agenda eletrônica automática, invente horários e a clínica se chama PedCare. Você agenda consultas para a doutora Juliana " + req.prompt
+        response = model.generate_content(prompt)
         return {"response": response.text}
     except Exception as e:
         return {"error": str(e)}
