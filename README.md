@@ -1,10 +1,11 @@
 # PED CARE
 
-Projeto de auxilio ao cliente voltado para a área de saude de facil configuração
+Projeto desenvolvido durante um hackathon com o foco em facilitar o processo de
+agendamento de consultas no contexto de saúde.
 
-Integrado ao google agenda
-
-bibliotecas:
+### Instalação de bibliotecas
 ```bash
-py -m pip install --upgrade google-api-python-client
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
