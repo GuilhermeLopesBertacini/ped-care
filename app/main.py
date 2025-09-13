@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 import google.generativeai as genai
-from pydantic import BaseModel
 import uvicorn
 import logging
+from models.prompt import PromptRequest
 
 # Configuração de logging
 logging.basicConfig(level=logging.INFO)
@@ -16,10 +16,6 @@ app = FastAPI()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
-# Define request body schema
-class PromptRequest(BaseModel):
-    prompt: str
 
 @app.post("/generate")
 async def generate_text(req: PromptRequest):
