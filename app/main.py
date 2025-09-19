@@ -5,7 +5,6 @@ from app.models.prompt import PromptRequest
 from utils.logger_class import LoggerClass
 
 
-genai.configure(api_key="your_api_key")
 app = FastAPI()
 LoggerClass.configure("ped-care", debug=True)
 
@@ -13,6 +12,7 @@ LoggerClass.configure("ped-care", debug=True)
 async def root():
     return {"message": "Hello World"}
 
+genai.configure(api_key="your_api_key")
 @app.post("/generate")
 async def generate_text(req: PromptRequest):
     try:
