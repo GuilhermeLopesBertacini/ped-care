@@ -2,11 +2,9 @@
 import os
 import time
 import logging
-from app.core.config import settings
 
+LOGS_DIR = os.path.join(os.getcwd(), 'app/logs')
 
-
-LOGS_DIR = settings.LOGS_DIR
 class LoggerClass:
     """Job: abstract all log generation/configuration"""
 

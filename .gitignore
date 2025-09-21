@@ -1,2 +1,33 @@
+# Arquivos de Ambiente
 .env
-/venv
+.venv
+venv/
+*.env
+
+# Bytecode e Cache do Python
+__pycache__/
+*$py.class
+
+# Arquivos de Cache e Configuração do Rye
+# Gerados pelo seu gerenciador de pacotes
+.rye/
+.python-version
+
+# Arquivos do VS Code
+# Configurações específicas do seu editor
+.vscode/
+
+# Arquivos de Teste e Cobertura
+# Gerados ao rodar testes com pytest, etc.
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Construção e Distribuição
+# Gerados ao empacotar seu projeto para distribuição
+build/
+dist/
+*.egg-info/
+
+# Logs
+app/logs/

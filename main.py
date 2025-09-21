@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 import google.generativeai as genai
 import uvicorn
 from app.models.prompt import PromptRequest
-from utils.logger_class import LoggerClass
+from app.utils.logger_class import LoggerClass
 
 
 app = FastAPI()
