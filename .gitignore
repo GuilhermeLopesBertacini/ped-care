@@ -31,3 +31,5 @@ dist/
 
 # Logs
 app/logs/
+
+app/external_services/credentials/*
