@@ -10,6 +10,8 @@
 #   universal: false
 
 -e file:.
+aiomysql==0.2.0
+    # via ped-care
 annotated-types==0.7.0
     # via pydantic
 anyio==4.10.0
@@ -91,6 +93,8 @@ pydantic-core==2.33.2
     # via pydantic
 pydantic-settings==2.10.1
     # via ped-care
+pymysql==1.1.2
+    # via aiomysql
 pyparsing==3.2.5
     # via httplib2
 python-dotenv==1.1.1
