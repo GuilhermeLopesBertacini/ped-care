@@ -1,28 +1,25 @@
-from fastapi import FastAPI, HTTPException, Depends
-import google.generativeai as genai
 import uvicorn
-from app.models.prompt import PromptRequest
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+
+from app.core.router import api_router
+from app.utils.load_env import load_env
 from app.utils.logger_class import LoggerClass
 
+load_env()
 
-app = FastAPI()
+from app.core.database import init_db, has_tables
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    if not await has_tables():
+        await init_db()
+    yield
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(api_router)
+
 LoggerClass.configure("ped-care", debug=True)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-genai.configure(api_key="your_api_key")
-@app.post("/generate")
-async def generate_text(req: PromptRequest):
-    try:
-        model = genai.GenerativeModel("gemini-2.5-flash")  # or gemini-1.5-pro
-        prompt = "Agora você é uma agenda eletrônica automática, invente horários e a clínica se chama PedCare. Você agenda consultas para a doutora Juliana " + req.prompt
-        response = model.generate_content(prompt)
-        return {"response": response.text}
-    except Exception as e:
-        return {"error": str(e)}
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
-    
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
