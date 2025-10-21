@@ -3,31 +3,67 @@
 Projeto desenvolvido durante um hackathon com o foco em facilitar o processo de
 agendamento de consultas no contexto de saúde.
 
+## 🚀 Setup com Docker
+
+Este projeto utiliza Docker Compose para facilitar o desenvolvimento e deployment.
+
 ### Pré-requisitos
 
-Antes de começar, você precisa ter o [Rye](https://rye.astral.sh/) instalado na sua máquina.
+- Docker
+- Docker Compose
 
-### Instalação e Execução do Projeto
+### Configuração
 
-1.  **Clone o repositório:**
+Edite o arquivo .env com suas credenciais
 
-    ```bash
-    git clone <url-do-seu-repositorio>
-    cd ped-care
-    ```
+### 🏃 Executando o projeto
 
-2.  **Instale as dependências:**
-    O Rye vai ler o arquivo `pyproject.toml`, criar um ambiente virtual e instalar tudo o que for necessário com um único comando.
+**Iniciar os serviços:**
+```bash
+docker compose up --build
+docker compose up -d
+docker compose logs -f app
+```
 
-    ```bash
-    rye sync
-    ```
+**Parar os serviços:**
+```bash
+docker compose down
+```
 
-3.  **Execute a aplicação:**
-    Use o `rye run` para executar o servidor dentro do ambiente virtual gerenciado por ele.
+**Parar e remover volumes (⚠️ apaga dados do banco):**
+```bash
+docker compose down -v
+```
 
-    ```bash
-    rye run uvicorn app.main:app --reload
-    ```
+### 🌐 Acessando a aplicação
 
-A aplicação estará rodando em `http://127.0.0.1:8000`.
+- **API**: http://localhost:8000
+- **Documentação (Swagger)**: http://localhost:8000/docs
+- **MySQL**: localhost:3306
+
+### 📦 Serviços
+
+O projeto contém dois serviços principais:
+
+- **app**: Aplicação FastAPI (Python 3.12)
+- **mysql**: Banco de dados MySQL 8.0
+
+### 🛠️ Desenvolvimento
+
+Os arquivos da pasta `app/` são montados como volume, permitindo hot-reload durante o desenvolvimento. Qualquer alteração no código será refletida automaticamente no container.
+
+### 🔧 Comandos úteis
+
+```bash
+# Rebuild apenas o serviço app
+docker compose build app
+
+# Executar comando dentro do container
+docker compose exec app bash
+
+# Ver status dos containers
+docker compose ps
+
+# Reiniciar um serviço específico
+docker compose restart app
+```
