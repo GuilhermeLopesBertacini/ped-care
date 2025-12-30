@@ -2,12 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from app.core.router import api_router
-from app.utils.load_env import load_env
 from app.utils.logger_class import LoggerClass
-
-load_env()
-
+from app.core.router import api_router
 from app.core.database import init_db, has_tables
 
 @asynccontextmanager

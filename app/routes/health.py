@@ -1,4 +1,3 @@
-from multiprocessing.pool import ApplyResult
 from fastapi import APIRouter
 
 router = APIRouter()
