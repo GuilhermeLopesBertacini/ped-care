@@ -1,4 +1,3 @@
-from contextlib import asynccontextmanager
 from urllib.parse import quote_plus
 from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine, create_async_engine
 from sqlalchemy import inspect
@@ -10,8 +9,8 @@ from sqlmodel import SQLModel
 from app.core.config import settings
 
 connection_url = f"mysql+aiomysql://{settings.DB_USER}:" \
-                f"{quote_plus(settings.DB_PASSWORD.get_secret_value())}@" \
-                f"{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
+                                f"{quote_plus(settings.DB_PASSWORD.get_secret_value())}@" \
+                                f"{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
 async_engine: AsyncEngine = create_async_engine(
   connection_url,
   pool_pre_ping=True, # Checks if the database is still active before accessing

@@ -1,8 +1,8 @@
-from google import genai
+import google.generativeai as genai
 
-client = genai.Client()
 
-response = client.models.generate_content(
-    model="gemini-2.5-flash", contents="Agora você é uma agenda inteligente para consultas médicas, e também atua como recepcionista, se introduza"
-)
-print(response.text)
+def generate_content(api_key: str, prompt: str) -> str:
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
