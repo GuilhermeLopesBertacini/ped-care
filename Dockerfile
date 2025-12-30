@@ -5,12 +5,18 @@ WORKDIR /app
 COPY requirements.txt ./
 COPY main.py .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies with uv
+RUN apk add --no-cache curl && \
+    curl -LsSf https://astral.sh/uv/install.sh | sh
 
+# Copiar arquivos de dependência
+COPY ./pyproject.toml /uv.lock ./
+
+# Instalar dependências
+RUN uv sync --frozen
 
 # Expose the port FastAPI runs on
 EXPOSE 8000
 
 # Command to run the application
-CMD ["python3", "-m", "main"]
+CMD ["uv", "run", "main.py"]

@@ -1,4 +1,4 @@
-.PHONY: help docker-build docker-run docker-logs docker-down
+.PHONY: help docker-build docker-run docker-logs docker-down run
 
 help:
 	@echo "Available commands:"
@@ -23,3 +23,13 @@ docker-logs: docker-run
 docker-down:
 	docker compose down -	v
 	@echo "Containers stopped and removed sucessfully"
+
+install:
+	@echo "Installing dependencies with uv..."
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	uv sync
+	@echo "Dependencies installed successfully"
+
+run: install
+	@echo "Running the application..."
+	uv run main.py

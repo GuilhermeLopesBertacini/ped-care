@@ -1,7 +1,7 @@
 [project]
 name = "ped-care"
 version = "0.1.0"
-description = "Add your description here"
+description = "Chat bot designed to manage appointments automatically. Integrated with google calendar."
 authors = [
     { name = "GuilhermeLopesBertacini", email = "guilb2005@gmail.com" }
 ]
