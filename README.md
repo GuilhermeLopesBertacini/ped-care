@@ -35,6 +35,8 @@ make docker-down
 
 ### 🌐 Acessando a aplicação
 
+Caso não tenha definido as portas do projeto no arquivo .env:
+
 - **API**: http://localhost:8000
 - **Documentação (Swagger)**: http://localhost:8000/docs
 - **MySQL**: localhost:3306
