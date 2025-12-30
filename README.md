@@ -20,19 +20,17 @@ Edite o arquivo .env com suas credenciais
 
 **Iniciar os serviços:**
 ```bash
-docker compose up --build
-docker compose up -d
-docker compose logs -f app
+make docker-run
 ```
 
 **Parar os serviços:**
 ```bash
-docker compose down
+make docker-stop
 ```
 
 **Parar e remover volumes (⚠️ apaga dados do banco):**
 ```bash
-docker compose down -v
+make docker-down
 ```
 
 ### 🌐 Acessando a aplicação
@@ -52,18 +50,8 @@ O projeto contém dois serviços principais:
 
 Os arquivos da pasta `app/` são montados como volume, permitindo hot-reload durante o desenvolvimento. Qualquer alteração no código será refletida automaticamente no container.
 
-### 🔧 Comandos úteis
+Uma opção mais simples, sem o uso do docker, consiste em utilizar o uv - gerenciador de pacotes e projetos. Para isso, basta executar:
 
 ```bash
-# Rebuild apenas o serviço app
-docker compose build app
-
-# Executar comando dentro do container
-docker compose exec app bash
-
-# Ver status dos containers
-docker compose ps
-
-# Reiniciar um serviço específico
-docker compose restart app
+make run
 ```

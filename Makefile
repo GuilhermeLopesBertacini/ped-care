@@ -1,4 +1,4 @@
-.PHONY: help docker-build docker-run docker-logs docker-down run
+.PHONY: help docker-build docker-run docker-stop docker-logs docker-down run
 
 help:
 	@echo "Available commands:"
@@ -19,6 +19,11 @@ docker-run: docker-build
 
 docker-logs: docker-run
 	docker compose logs -f app
+
+docker-stop:
+	@echo "Stopping containers..."
+	docker compose stop
+	@echo "Containers stopped successfully"
 
 docker-down:
 	docker compose down -	v
