@@ -1,18 +1,24 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 
 WORKDIR /app
-
-COPY requirements.txt ./
-COPY main.py .
 
 # Install Python dependencies with uv
 RUN apk add --no-cache curl && \
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Copiar arquivos de dependência
-COPY ./pyproject.toml /uv.lock ./
+ENV PATH="/root/.local/bin:$PATH"
 
-# Instalar dependências
+# Copiar arquivos de dependência
+COPY pyproject.toml uv.lock ./
+
+# Instalar dependências (sem instalar/buildar o projeto em si)
+RUN uv sync --frozen --no-install-project
+
+# Copiar código da aplicação
+COPY main.py .
+COPY app ./app
+
+# Instalar o projeto (editable) agora que o código está presente
 RUN uv sync --frozen
 
 # Expose the port FastAPI runs on

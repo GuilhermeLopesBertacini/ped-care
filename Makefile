@@ -14,20 +14,19 @@ docker-build:
 
 docker-run: docker-build
 	@echo "Initializing containers..."
-	docker compose up -d
+	docker compose up -d --force-recreate
 	@echo "Containers are running"
 
 docker-logs: docker-run
 	docker compose logs -f app
 
 docker-stop:
-	@echo "Stopping containers..."
 	docker compose stop
 	@echo "Containers stopped successfully"
 
 docker-down:
-	docker compose down -	v
-	@echo "Containers stopped and removed sucessfully"
+	docker compose down -v
+	@echo "Containers removed sucessfully"
 
 install:
 	@echo "Installing dependencies with uv..."
